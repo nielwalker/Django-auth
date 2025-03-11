@@ -86,11 +86,13 @@ def user_registration(request):
 
         if User.objects.filter(username=user_name).exists():
             messages.error(request, 'Username Taken')
-            return render(request, 'lms/user_registration.html', {'first_name': first_name, 'last_name': last_name, 'email': email, 'mobile': mobile})
-
+            return render(request, 'lms/user_registration.html')
         elif User.objects.filter(email=email).exists():
             messages.error(request, 'Email Taken')
-            return render(request, 'lms/user_registration.html', {'first_name': first_name, 'last_name': last_name, 'user_name': user_name, 'mobile': mobile})
+            return render(request, 'lms/user_registration.html')
+        elif password1 != password2:
+            messages.error(request, 'Passwords do not match')
+            return render(request, 'lms/user_registration.html')
         else:
             user = User.objects.create_user(
                 username=user_name,
@@ -123,7 +125,7 @@ def login(request):
         user = auth.authenticate(username=user_name, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('lms:dashboard')
+            return redirect('lms:dashboard')  # Corrected redirect
         else:
             messages.error(request, 'Invalid credentials')
             return redirect('lms:login')
@@ -181,3 +183,15 @@ def learn_as_trainer(request):
     user.is_staff = True
     user.save()
     return render(request, 'lms/learn_as_trainer.html')
+
+@login_required
+def register_as_trainer(request):
+    user = request.user
+    if not user.is_staff:
+        user.is_staff = True
+        user.save()
+        TrainerRegistration.objects.create(user=user, status=True)
+        messages.success(request, 'You have been registered as a trainer.')
+    else:
+        messages.info(request, 'You are already registered as a trainer.')
+    return redirect('lms:home')
