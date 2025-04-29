@@ -1,0 +1,57 @@
+/* Black header container */
+.header-container {
+    background-color: black;
+    padding: 20px;
+}
+
+/* Header wrapper to align items properly */
+.header-wrapper {
+    display: flex;
+    justify-content: space-between; /* Pushes logout button to the right */
+    align-items: center;
+}
+
+/* Remove additional text styles */
+.header-wrapper h1 {
+    margin: 0;
+    font-size: 40px;
+    color:orange;
+    margin-right: 80px;
+}
+
+/* Make links bigger */
+.nav-left {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-left a {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+
+.nav-left a:hover {
+    text-decoration: underline;
+}
+
+/* Push logout button to the right */
+.nav-right {
+    margin-left: auto; /* Ensures it aligns to the right */
+}
+
+.nav-right .logout-btn {
+    background-color: orange;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-right .logout-btn:hover {
+    background-color: darkorange;
+}

@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import logging
+from django.shortcuts import get_object_or_404
 
 
 logger = logging.getLogger(__name__)
@@ -22,7 +23,7 @@ def course_info(request):
 
     if request.method == 'POST':
         form = CourseInfoForm(request.POST, request.FILES)
-        if form.is_valid():  # Form cleaning & Validation
+        if form.is_valid():
             new_course = form.save()
             return HttpResponseRedirect(reverse('lms:course_details', args=[new_course.slug]))
 
@@ -44,13 +45,12 @@ def course_info(request):
     return render(request, 'lms/learn_as_trainer.html')
 
 def course_details(request, course_slug):
-    course_info = CourseInfo.objects.get(slug=course_slug)
+    course = get_object_or_404(CourseInfo, slug=course_slug)
+    return render(request, 'lms/course_details.html', {'course': course})
 
-    context = {
-        "course_slug": course_slug,
-        "course_info": course_info,
-    }
-    return render(request, 'lms/course_details.html', context)
+def list_course_slugs(request):
+    slugs = CourseInfo.objects.values_list('slug', flat=True)
+    return render(request, 'lms/list_slugs.html', {'slugs': slugs})
 
 def course_basic_details(request, course_slug):
     user = request.user
@@ -99,6 +99,7 @@ def user_registration(request):
                 first_name=first_name,
                 last_name=last_name,
                 email=email,
+                mobile=mobile,
                 password=password1
             )
             user.save()
@@ -109,11 +110,14 @@ def user_registration(request):
 
 def dashboard(request):
     total_users = User.objects.count()
-    recent_users = User.objects.order_by('-date_joined')[:5]  # Get last 5 users
+    recent_users = User.objects.order_by('-date_joined')[:5]  #last 5 users
+    courses = CourseInfo.objects.all().distinct()
+    
 
     context = {
         'total_users': total_users,
         'recent_users': recent_users,
+        'courses': courses,
     }
     return render(request, 'lms/dashboard.html', context)
 
@@ -164,6 +168,7 @@ def trainer_registration(request):
                 first_name=first_name,
                 last_name=last_name,
                 email=email,
+                mobile=mobile,
                 password=password1
             )
             user.is_staff = True

@@ -9,6 +9,16 @@ h1 {
     color: #ffffff;
 }
 
+/* Button Styles */
+.btn-primary, .btn-secondary {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    white-space: nowrap;
+    color: white;
+}
+
 .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
@@ -19,57 +29,140 @@ h1 {
     border-color: #6c757d;
 }
 
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Main Body */
 .mainbody {
-    background-color: #296db1;
-    padding: 40px;
-    margin: 20px;
-    width: 500px;
-    height: 500px;
-    border-radius: 7px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: 250px;
-    left: 1250px;
+    background-color: rgba(0, 123, 255, 0.8);
+    padding: 30px 20px;
+    border-radius: 15px;
+    color: white;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
 #welcometext {
     color: white;
-    font-size: 50px;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
+/* Header */
 header.container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #007bff; /* Added background color */
+    width: 100%;
+    margin: 0;
+    padding: 20px 0;
+    background-color: black;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
 }
 
 header h1 {
-    color: #fff; /* Changed text color to white for better contrast */
+    color: #fff;
     font-size: 36px;
     margin-bottom: 20px;
 }
 
 header nav {
     display: flex;
-    justify-content: center;
-    gap: 20px; /* adds space between links */
-    flex-wrap: wrap; /* wraps links on smaller screens */
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 30px;
+    box-sizing: border-box;
 }
 
 header nav a {
-    color: white; /* Better contrast on blue background */
+    color: white;
     text-decoration: none;
-    margin: 10px 0;
     font-size: 18px;
     font-weight: bold;
+    padding: 5px 10px;
 }
 
-header nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* subtle white background */
-    padding: 5px 10px;
+header nav a.logout-btn {
+    background-color: orange;
     border-radius: 5px;
+    padding: 5px 15px;
+}
+
+/* Background */
+.background-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/static/lms/USTP background.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    gap: 15px;
+    max-width: 600px; /* Increased width */
+    padding: 10px;
+}
+
+.button-container .btn {
+    flex: 1;
+    min-width: 160px;
+    max-width: 220px;
+    text-align: center;
+    padding: 12px 18px;
+    border-radius: 25px;
+    font-size: 1rem;
+}
+
+.button-container a {
+    margin: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button-container .btn {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+/* Section Header */
+.section-header {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.section-header h3 a {
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.section-header h3 a:hover {
+    background-color: #0056b3;
 }

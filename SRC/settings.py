@@ -65,7 +65,7 @@ ROOT_URLCONF = 'SRC.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'SRC', 'lms', 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'lms','templates')],  # ✅ Corrected
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,7 +80,7 @@ TEMPLATES = [
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'SRC', 'lms', 'static'),
+    os.path.join(BASE_DIR, "lms", "static")
 ]
 
 WSGI_APPLICATION = 'SRC.wsgi.application'
@@ -131,7 +131,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

@@ -1,12 +1,16 @@
 {% extends 'lms/home_base.html' %}
+
 {% block content %}
-
-<section style="margin-top: 100px;" id="team">
-  <section class="container">
-    <div class="section-header">
-      <h3><a href="{% url 'lms:course_basic_details' course_slug %}">Course Details</a></h3>
-    </div>
-  </section>
-</section>
-
-{% endblock content %}
+    <h2>Available Courses</h2>
+    <ul>
+        {% for course in courses %}
+            <li>
+                <a href="{% url 'course_details' course.slug %}">
+                    {{ course.name }} ({{ course.slug }})
+                </a>
+            </li>
+        {% empty %}
+            <li>No courses available.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

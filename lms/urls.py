@@ -14,5 +14,6 @@ urlpatterns = [
     path('trainer_registration/', views.trainer_registration, name='trainer_registration'),
     path('learn_as_trainer/', views.learn_as_trainer, name='learn_as_trainer'),
     path('register_as_trainer/', views.register_as_trainer, name='register_as_trainer'),
-    path('dashboard/', views.dashboard, name='dashboard'),  # Ensure this URL pattern is included
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('lms/list_slugs/', views.list_course_slugs, name='list_course_slugs'),
 ]

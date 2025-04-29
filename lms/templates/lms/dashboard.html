@@ -6,18 +6,27 @@
     <title>Dashboard</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'lms/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'lms/dashboard.css' %}"> <!-- New external CSS file -->
 </head>
 <body>
-    <header class="container">
-        <h1>Dashboard</h1>
-        <nav>
-            <a href="{% url 'lms:course_details' course_slug='your_course_slug' %}">Course Management</a>
-            <a href="#">User Management</a>
-            <a href="#">Trainer Applications</a>
-            <a href="#">Reports</a>
-            <a href="#">Site Settings</a>
-            <a href="{% url 'lms:logout' %}" class="logout-btn">Logout</a>
-        </nav>
+    <header class="header-container">
+        <div class="header-wrapper">
+            <div class="nav-left">
+                <h1>Dashboard</h1>
+                {% if courses %}
+                    <a href="{% url 'course_details' %}">View Courses</a>
+                {% else %}
+                    <a href="#">No courses available</a>
+                {% endif %}
+                <a href="#">User Management</a>
+                <a href="#">Trainer Applications</a>
+                <a href="#">Reports</a>
+                <a href="#">Site Settings</a>
+            </div>
+            <div class="nav-right">
+                <a href="{% url 'lms:logout' %}" class="logout-btn">Logout</a>
+            </div>
+        </div>
     </header>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

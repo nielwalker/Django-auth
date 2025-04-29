@@ -25,12 +25,26 @@ class CourseInfo(models.Model):
     def __str__(self):
         return self.course_name
 
+def course_slug_generator(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = course_slug(instance)
+
+pre_save.connect(course_slug_generator, sender=CourseInfo)
+
 def course_slug(instance):
     return instance.course_name.lower().replace(' ', '-')
 
 def course_slug_generator(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = course_slug(instance)
+
+
+class Course(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)  # Needed for course URLs
+
+    def __str__(self):
+        return self.name
 
 pre_save.connect(course_slug_generator, sender=CourseInfo)
 
